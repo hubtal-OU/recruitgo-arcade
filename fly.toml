@@ -1,14 +1,19 @@
-app = "recruitgo-arcade" # replace with your actual app name
+app = "recruitgo-arcade"
+primary_region = "arn"
 
-[env]
-  PORT = "8080"
+# HTTP service configuration for Node.js + Socket.IO
+[http_service]
+auto_start_machines = true
+auto_stop_machines = true
+force_https = true
+internal_port = 3000  # Must match the port your app listens on
+min_machines_running = 0
+processes = [ "app" ]
 
-[[services]]
-  internal_port = 8080
-  protocol = "tcp"
-  [[services.ports]]
-    handlers = ["http"]
-    port = 80
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
+# WebSockets are supported by default with [http_service]
+# No extra config needed for Socket.IO
+
+[[vm]]
+cpu_kind = "shared"
+cpus = 1
+memory = "1gb"
