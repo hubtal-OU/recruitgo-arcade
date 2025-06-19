@@ -1,0 +1,104 @@
+{
+  "questions": [
+    {
+      "text": "What is an Employer of Record (EOR)?",
+      "options": [
+        "A company that handles payroll and HR for remote workers",
+        "A type of remote work software",
+        "A government agency for remote work",
+        "A remote work certification program"
+      ],
+      "correctAnswer": "A company that handles payroll and HR for remote workers"
+    },
+    {
+      "text": "Which of these is NOT typically handled by an EOR?",
+      "options": [
+        "Payroll processing",
+        "Tax compliance",
+        "Product development",
+        "Benefits administration"
+      ],
+      "correctAnswer": "Product development"
+    },
+    {
+      "text": "What is the main advantage of using an EOR for international remote workers?",
+      "options": [
+        "Lower internet costs",
+        "Compliance with local labor laws",
+        "Better video conferencing",
+        "Faster shipping options"
+      ],
+      "correctAnswer": "Compliance with local labor laws"
+    },
+    {
+      "text": "Which of these is a common challenge in remote work that an EOR can help solve?",
+      "options": [
+        "Internet connectivity issues",
+        "Time zone differences",
+        "International payroll compliance",
+        "Team communication"
+      ],
+      "correctAnswer": "International payroll compliance"
+    },
+    {
+      "text": "What does 'PEO' stand for in the context of remote work?",
+      "options": [
+        "Professional Employer Organization",
+        "Personal Employment Office",
+        "Public Employment Organization",
+        "Private Employment Operator"
+      ],
+      "correctAnswer": "Professional Employer Organization"
+    },
+    {
+      "text": "Which of these is typically NOT a service provided by an EOR?",
+      "options": [
+        "Work visa sponsorship",
+        "Local tax compliance",
+        "Project management",
+        "Employee benefits"
+      ],
+      "correctAnswer": "Project management"
+    },
+    {
+      "text": "What is the main difference between an EOR and a staffing agency?",
+      "options": [
+        "EORs handle compliance, staffing agencies handle recruitment",
+        "EORs are cheaper than staffing agencies",
+        "EORs only work with remote workers",
+        "Staffing agencies are more modern"
+      ],
+      "correctAnswer": "EORs handle compliance, staffing agencies handle recruitment"
+    },
+    {
+      "text": "Which of these is a key benefit of using an EOR for remote work?",
+      "options": [
+        "Faster internet speeds",
+        "Reduced legal liability",
+        "Better office equipment",
+        "More vacation days"
+      ],
+      "correctAnswer": "Reduced legal liability"
+    },
+    {
+      "text": "What is 'co-employment' in the context of EOR services?",
+      "options": [
+        "A legal relationship where EOR shares employment responsibilities",
+        "A type of remote work arrangement",
+        "A method of team building",
+        "A payroll processing system"
+      ],
+      "correctAnswer": "A legal relationship where EOR shares employment responsibilities"
+    },
+    {
+      "text": "Which of these is most important when choosing an EOR for remote work?",
+      "options": [
+        "Their global compliance expertise",
+        "Their office locations",
+        "Their software tools",
+        "Their team size"
+      ],
+      "correctAnswer": "Their global compliance expertise"
+    }
+  ]
+} 

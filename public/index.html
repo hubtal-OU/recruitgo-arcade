@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <img src="images/arcade-plane.png" alt="Arcade Airplane" class="arcade-plane" id="arcade-plane" />
+    <div class="container">
+        <div id="start-screen" class="screen">
+            <h1 class="title">RecruitGo Quiz</h1>
+            <div class="instructions">
+                <h2>HOW TO PLAY</h2>
+                <div class="instruction-grid">
+                    <div class="instruction-section">
+                        <h3>PLAYER 1</h3>
+                        <p>Use QWER keys to answer:</p>
+                        <ul>
+                            <li><span class="key">Q</span> - Green option</li>
+                            <li><span class="key">W</span> - Blue option</li>
+                            <li><span class="key">E</span> - Red option</li>
+                            <li><span class="key">R</span> - Yellow option</li>
+                        </ul>
+                    </div>
+                    <div class="instruction-section">
+                        <h3>PLAYER 2</h3>
+                        <p>Use UIOP keys to answer:</p>
+                        <ul>
+                            <li><span class="key">U</span> - Green option</li>
+                            <li><span class="key">I</span> - Blue option</li>
+                            <li><span class="key">O</span> - Red option</li>
+                            <li><span class="key">P</span> - Yellow option</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="game-rules">
+                    <h3>RULES</h3>
+                    <ul>
+                        <li>First player to answer gets the points.</li>
+                        <li>Answer quickly to get more points.</li>
+                    </ul>
+                </div>
+            </div>
+            <button id="start-button" class="arcade-button">START GAME</button>
+        </div>
+
+        <div id="game-screen" class="screen hidden">
+            <div class="scores-header">
+                <div class="player-score">
+                    <span class="player-label">PLAYER 1</span>
+                    <span id="player1-score">0</span>
+                </div>
+                <div class="player-score">
+                    <span class="player-label">PLAYER 2</span>
+                    <span id="player2-score">0</span>
+                </div>
+            </div>
+            <div class="countdown-overlay hidden">
+                <div id="countdown-number">3</div>
+                <div id="countdown-start" class="hidden">START!</div>
+            </div>
+            <div class="game-container">
+                <div class="question-container">
+                    <h2 id="question-text"></h2>
+                    <div id="points">1000</div>
+                </div>
+                <div class="options-grid">
+                    <div id="options" class="options"></div>
+                </div>
+                <div id="answer-feedback" class="answer-feedback hidden">
+                    <span id="feedback-player"></span> got <span id="feedback-points"></span> points!
+                </div>
+                <div class="controls-hint">
+                    <p>Player 1: Q (Green) W (Blue) E (Red) R (Yellow)</p>
+                    <p>Player 2: U (Green) I (Blue) O (Red) P (Yellow)</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-over-screen" class="screen hidden">
+            <div class="winner-container">
+                <h2 id="winner-text" class="winner"></h2>
+                <div class="winner-trophy">🏆</div>
+            </div>
+            <div class="final-scores">
+                <div class="score">Player 1: <span id="final-player1-score">0</span></div>
+                <div class="score">Player 2: <span id="final-player2-score">0</span></div>
+            </div>
+            <button id="play-again-button" class="arcade-button">PLAY AGAIN</button>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="correct-sound" src="sounds/correct.mp3" preload="auto"></audio>
+    <audio id="incorrect-sound" src="sounds/incorrect.mp3" preload="auto"></audio>
+    <audio id="winner-sound" src="sounds/winner.mp3" preload="auto"></audio>
+    <audio id="instructions-audio" src="sounds/instructions.mp3" preload="auto"></audio>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="game.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            const audio = document.getElementById('instructions-audio');
+            if (audio) {
+                audio.play().catch(() => {/* Autoplay may be blocked until user interacts */ });
+            }
+        });
+    </script>
+</body>
+
+</html>
