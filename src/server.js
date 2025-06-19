@@ -5,8 +5,15 @@ const fs = require('fs').promises;
 const path = require('path');
 
 const app = express();
+app.set('trust proxy', 1); // Allow WebSocket upgrades behind proxy
+
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 
 // Serve static files from the public directory
 app.use(express.static('public'));
