@@ -1,19 +1,22 @@
-app = "recruitgo-arcade"
-primary_region = "arn"
+# fly.toml app configuration file generated for recruitgo-arcade-falling-sun-2062 on 2025-06-19T12:23:10+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-# HTTP service configuration for Node.js + Socket.IO
+app = 'recruitgo-arcade-falling-sun-2062'
+primary_region = 'arn'
+
+[build]
+
 [http_service]
-auto_start_machines = true
-auto_stop_machines = true
-force_https = true
-internal_port = 3000  # Must match the port your app listens on
-min_machines_running = 0
-processes = [ "app" ]
-
-# WebSockets are supported by default with [http_service]
-# No extra config needed for Socket.IO
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
 [[vm]]
-cpu_kind = "shared"
-cpus = 1
-memory = "1gb"
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
