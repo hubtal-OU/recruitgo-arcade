@@ -1,0 +1,16 @@
+[Unit]
+Description=Arcade Quiz Game
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/arcade-quiz
+ExecStart=/usr/bin/node src/server.js
+Restart=always
+RestartSec=10
+Environment=NODE_ENV=production
+Environment=PORT=3000
+
+[Install]
+WantedBy=multi-user.target 

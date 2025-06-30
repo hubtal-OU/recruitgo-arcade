@@ -41,9 +41,186 @@ let canAnswer = true;
 let lastAnswerTime = 0;
 const LOCKOUT_DURATION = 1000; // 1 second lockout
 
+// Arcade controller state
+let gamepadConnected = false;
+let lastButtonStates = {};
+let autoStartTimer = null;
+
 // Event Listeners
 startButton.addEventListener('click', startGame);
 playAgainButton.addEventListener('click', startGame);
+
+// Gamepad event listeners
+window.addEventListener("gamepadconnected", (e) => {
+    console.log("Gamepad connected:", e.gamepad.id);
+    gamepadConnected = true;
+    updateControllerStatus();
+    
+    // Auto-start game after 3 seconds when controller is connected
+    if (startScreen && !startScreen.classList.contains('hidden')) {
+        autoStartTimer = setTimeout(() => {
+            startGame();
+        }, 3000);
+    }
+});
+
+window.addEventListener("gamepaddisconnected", (e) => {
+    console.log("Gamepad disconnected:", e.gamepad.id);
+    gamepadConnected = false;
+    updateControllerStatus();
+    
+    // Clear auto-start timer if controller disconnects
+    if (autoStartTimer) {
+        clearTimeout(autoStartTimer);
+        autoStartTimer = null;
+    }
+});
+
+function updateControllerStatus() {
+    const statusElement = document.getElementById('controller-status');
+    if (statusElement) {
+        if (gamepadConnected) {
+            if (autoStartTimer) {
+                statusElement.textContent = 'ARCADE CONTROLLER CONNECTED - Auto-starting in 3 seconds or press GREEN button...';
+            } else {
+                statusElement.textContent = 'ARCADE CONTROLLER CONNECTED - Press GREEN button to start!';
+            }
+            statusElement.className = 'controller-status connected';
+        } else {
+            statusElement.textContent = 'ARCADE CONTROLLER NOT CONNECTED - Use keyboard controls';
+            statusElement.className = 'controller-status disconnected';
+        }
+    }
+}
+
+// Gamepad polling function
+function pollGamepad() {
+    if (!gamepadConnected) return;
+    
+    const gamepads = navigator.getGamepads();
+    const gamepad = gamepads[0]; // Assume first gamepad is our arcade controller
+    
+    if (!gamepad) return;
+    
+    // Check each button (0-7 for our 8-button arcade controller)
+    for (let i = 0; i < Math.min(8, gamepad.buttons.length); i++) {
+        const button = gamepad.buttons[i];
+        const wasPressed = lastButtonStates[i] || false;
+        const isPressed = button.pressed;
+        
+        // Detect button press (not held)
+        if (isPressed && !wasPressed) {
+            handleControllerInput(i);
+        }
+        
+        lastButtonStates[i] = isPressed;
+    }
+}
+
+function handleControllerInput(buttonIndex) {
+    // Handle green buttons (0 and 4) for start/restart game
+    if (buttonIndex === 0 || buttonIndex === 4) { // Green buttons for both players
+        if (!gameActive && !startScreen.classList.contains('hidden')) {
+            // Cancel auto-start timer if manually triggered
+            if (autoStartTimer) {
+                clearTimeout(autoStartTimer);
+                autoStartTimer = null;
+            }
+            // Start game from start screen
+            startGame();
+            return;
+        } else if (!gameActive && !gameOverScreen.classList.contains('hidden')) {
+            // Restart game from game over screen
+            startGame();
+            return;
+        }
+    }
+    
+    if (!gameActive || !currentQuestion || !canAnswer) {
+        return;
+    }
+    
+    const now = Date.now();
+    if (now - lastAnswerTime < LOCKOUT_DURATION) return;
+    
+    let optionIndex;
+    let playerId;
+    
+    // Map controller buttons to players and options
+    // Player 1: buttons 0-3 (Green, Red, Yellow, Blue)
+    // Player 2: buttons 4-7 (Green, Red, Yellow, Blue)
+    switch (buttonIndex) {
+        case 0: playerId = 'player1'; optionIndex = 0; break; // Green
+        case 1: playerId = 'player1'; optionIndex = 2; break; // Red  
+        case 2: playerId = 'player1'; optionIndex = 3; break; // Yellow
+        case 3: playerId = 'player1'; optionIndex = 1; break; // Blue
+        case 4: playerId = 'player2'; optionIndex = 0; break; // Green
+        case 5: playerId = 'player2'; optionIndex = 2; break; // Red
+        case 6: playerId = 'player2'; optionIndex = 3; break; // Yellow
+        case 7: playerId = 'player2'; optionIndex = 1; break; // Blue
+    }
+    
+    if (optionIndex !== undefined) {
+        lastKeyPressed = playerId;
+        lastAnswerTime = now;
+        const options = document.getElementById('options');
+        const option = options.children[optionIndex];
+        if (option && !option.disabled) {
+            option.click();
+        }
+    }
+}
+
+// Start gamepad polling
+setInterval(pollGamepad, 16); // ~60fps polling
+
+// Initialize controller status on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Check for already connected gamepads
+    const gamepads = navigator.getGamepads();
+    for (let i = 0; i < gamepads.length; i++) {
+        if (gamepads[i]) {
+            gamepadConnected = true;
+            updateControllerStatus();
+            break;
+        }
+    }
+    updateControllerStatus();
+});
+
+// Keyboard controls (kept for testing purposes)
+document.addEventListener('keydown', (event) => {
+    if (!gameActive || !currentQuestion || !canAnswer) return;
+    
+    const now = Date.now();
+    if (now - lastAnswerTime < LOCKOUT_DURATION) return;
+    
+    const key = event.key.toLowerCase();
+    let optionIndex;
+    let playerId;
+    
+    // Player 1 controls (QWER)
+    if (key === 'q') { playerId = 'player1'; optionIndex = 0; }
+    else if (key === 'w') { playerId = 'player1'; optionIndex = 1; }
+    else if (key === 'e') { playerId = 'player1'; optionIndex = 2; }
+    else if (key === 'r') { playerId = 'player1'; optionIndex = 3; }
+    
+    // Player 2 controls (UIOP)
+    else if (key === 'u') { playerId = 'player2'; optionIndex = 0; }
+    else if (key === 'i') { playerId = 'player2'; optionIndex = 1; }
+    else if (key === 'o') { playerId = 'player2'; optionIndex = 2; }
+    else if (key === 'p') { playerId = 'player2'; optionIndex = 3; }
+    
+    if (optionIndex !== undefined) {
+        lastKeyPressed = playerId;
+        lastAnswerTime = now;
+        const options = document.getElementById('options');
+        const option = options.children[optionIndex];
+        if (option && !option.disabled) {
+            option.click();
+        }
+    }
+});
 
 // Socket.IO event handlers
 socket.on('connect', () => {
@@ -200,40 +377,6 @@ function startTimer() {
         }
     }, 10);
 }
-
-// Keyboard controls
-document.addEventListener('keydown', (event) => {
-    if (!gameActive || !currentQuestion || !canAnswer) return;
-    
-    const now = Date.now();
-    if (now - lastAnswerTime < LOCKOUT_DURATION) return;
-    
-    const key = event.key.toLowerCase();
-    let optionIndex;
-    let playerId;
-    
-    // Player 1 controls (QWER)
-    if (key === 'q') { playerId = 'player1'; optionIndex = 0; }
-    else if (key === 'w') { playerId = 'player1'; optionIndex = 1; }
-    else if (key === 'e') { playerId = 'player1'; optionIndex = 2; }
-    else if (key === 'r') { playerId = 'player1'; optionIndex = 3; }
-    
-    // Player 2 controls (UIOP)
-    else if (key === 'u') { playerId = 'player2'; optionIndex = 0; }
-    else if (key === 'i') { playerId = 'player2'; optionIndex = 1; }
-    else if (key === 'o') { playerId = 'player2'; optionIndex = 2; }
-    else if (key === 'p') { playerId = 'player2'; optionIndex = 3; }
-    
-    if (optionIndex !== undefined) {
-        lastKeyPressed = playerId;
-        lastAnswerTime = now;
-        const options = document.getElementById('options');
-        const option = options.children[optionIndex];
-        if (option && !option.disabled) {
-            option.click();
-        }
-    }
-});
 
 function showFeedback(playerId, points, isLateAnswer) {
     feedbackPlayer.textContent = playerId === 'player1' ? 'PLAYER 1' : 'PLAYER 2';

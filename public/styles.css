@@ -667,4 +667,196 @@ body {
         transform: rotate(5deg);
         opacity: 1;
     }
+}
+
+/* Controller status */
+.controller-status {
+    font-size: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    border: 2px solid;
+    animation: pulse 2s infinite;
+}
+
+.controller-status.connected {
+    background-color: rgba(0, 255, 0, 0.1);
+    border-color: var(--arcade-green);
+    color: var(--arcade-green);
+}
+
+.controller-status.disconnected {
+    background-color: rgba(255, 255, 0, 0.1);
+    border-color: var(--arcade-yellow);
+    color: var(--arcade-yellow);
+}
+
+/* Control methods layout */
+.control-methods {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.arcade-controls, .keyboard-controls {
+    flex: 1;
+    min-width: 200px;
+}
+
+.arcade-controls p, .keyboard-controls p {
+    color: var(--arcade-cyan);
+    margin-bottom: 0.5rem;
+}
+
+/* Arcade button indicators */
+.button {
+    font-size: 1.2rem;
+    margin: 0 0.2rem;
+    text-shadow: 1px 1px 0 var(--arcade-black);
+}
+
+.button.green {
+    color: var(--arcade-green);
+}
+
+.button.red {
+    color: var(--arcade-red);
+}
+
+.button.yellow {
+    color: var(--arcade-yellow);
+}
+
+.button.blue {
+    color: var(--arcade-blue);
+}
+
+/* Arcade Start Button */
+.arcade-start-section {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.arcade-start-button {
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border: 4px solid var(--arcade-green);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.arcade-start-button::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--arcade-green), transparent, var(--arcade-green));
+    border-radius: 16px;
+    z-index: -1;
+    animation: border-glow 2s linear infinite;
+}
+
+.arcade-start-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 0 30px rgba(0, 255, 0, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    border-color: #00ff44;
+}
+
+.arcade-start-button:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 0 15px rgba(0, 255, 0, 0.4),
+        inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.button-icon {
+    font-size: 3rem;
+    text-shadow: 0 0 10px currentColor;
+    animation: pulse-icon 2s ease-in-out infinite;
+}
+
+.button-text {
+    text-align: left;
+}
+
+.main-text {
+    font-size: 1.5rem;
+    color: var(--arcade-white);
+    text-shadow: 2px 2px 0 var(--arcade-black);
+    margin-bottom: 0.5rem;
+}
+
+.sub-text {
+    font-size: 0.8rem;
+    color: var(--arcade-green);
+    text-shadow: 1px 1px 0 var(--arcade-black);
+    opacity: 0.9;
+}
+
+@keyframes border-glow {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+@keyframes pulse-icon {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Mobile responsive for control methods */
+@media (max-width: 768px) {
+    .control-methods {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .instruction-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .controller-status {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+    
+    .arcade-start-button {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.2rem 1.5rem;
+    }
+    
+    .button-text {
+        text-align: center;
+    }
+    
+    .main-text {
+        font-size: 1.2rem;
+    }
+    
+    .sub-text {
+        font-size: 0.7rem;
+    }
 } 

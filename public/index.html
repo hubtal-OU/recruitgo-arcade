@@ -15,28 +15,57 @@
     <div class="container">
         <div id="start-screen" class="screen">
             <h1 class="title">RecruitGo Quiz</h1>
+            <div id="controller-status" class="controller-status disconnected">
+                ARCADE CONTROLLER NOT CONNECTED - Use keyboard controls
+            </div>
             <div class="instructions">
                 <h2>HOW TO PLAY</h2>
                 <div class="instruction-grid">
                     <div class="instruction-section">
                         <h3>PLAYER 1</h3>
-                        <p>Use QWER keys to answer:</p>
-                        <ul>
-                            <li><span class="key">Q</span> - Green option</li>
-                            <li><span class="key">W</span> - Blue option</li>
-                            <li><span class="key">E</span> - Red option</li>
-                            <li><span class="key">R</span> - Yellow option</li>
-                        </ul>
+                        <div class="control-methods">
+                            <div class="arcade-controls">
+                                <p>Arcade Controller:</p>
+                                <ul>
+                                    <li><span class="button green">●</span> Green button</li>
+                                    <li><span class="button red">●</span> Red button</li>
+                                    <li><span class="button yellow">●</span> Yellow button</li>
+                                    <li><span class="button blue">●</span> Blue button</li>
+                                </ul>
+                            </div>
+                            <div class="keyboard-controls">
+                                <p>Keyboard (testing):</p>
+                                <ul>
+                                    <li><span class="key">Q</span> - Green option</li>
+                                    <li><span class="key">W</span> - Blue option</li>
+                                    <li><span class="key">E</span> - Red option</li>
+                                    <li><span class="key">R</span> - Yellow option</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="instruction-section">
                         <h3>PLAYER 2</h3>
-                        <p>Use UIOP keys to answer:</p>
-                        <ul>
-                            <li><span class="key">U</span> - Green option</li>
-                            <li><span class="key">I</span> - Blue option</li>
-                            <li><span class="key">O</span> - Red option</li>
-                            <li><span class="key">P</span> - Yellow option</li>
-                        </ul>
+                        <div class="control-methods">
+                            <div class="arcade-controls">
+                                <p>Arcade Controller:</p>
+                                <ul>
+                                    <li><span class="button green">●</span> Green button</li>
+                                    <li><span class="button red">●</span> Red button</li>
+                                    <li><span class="button yellow">●</span> Yellow button</li>
+                                    <li><span class="button blue">●</span> Blue button</li>
+                                </ul>
+                            </div>
+                            <div class="keyboard-controls">
+                                <p>Keyboard (testing):</p>
+                                <ul>
+                                    <li><span class="key">U</span> - Green option</li>
+                                    <li><span class="key">I</span> - Blue option</li>
+                                    <li><span class="key">O</span> - Red option</li>
+                                    <li><span class="key">P</span> - Yellow option</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="game-rules">
@@ -44,10 +73,19 @@
                     <ul>
                         <li>First player to answer gets the points.</li>
                         <li>Answer quickly to get more points.</li>
+                        <li>Game auto-starts when arcade controller is connected.</li>
                     </ul>
                 </div>
             </div>
-            <button id="start-button" class="arcade-button">START GAME</button>
+            <div class="arcade-start-section">
+                <button id="start-button" class="arcade-start-button">
+                    <div class="button-icon green">●</div>
+                    <div class="button-text">
+                        <div class="main-text">START GAME</div>
+                        <div class="sub-text">Press any GREEN button</div>
+                    </div>
+                </button>
+            </div>
         </div>
 
         <div id="game-screen" class="screen hidden">
@@ -77,8 +115,8 @@
                     <span id="feedback-player"></span> got <span id="feedback-points"></span> points!
                 </div>
                 <div class="controls-hint">
-                    <p>Player 1: Q (Green) W (Blue) E (Red) R (Yellow)</p>
-                    <p>Player 2: U (Green) I (Blue) O (Red) P (Yellow)</p>
+                    <p>Player 1: <span class="button green">●</span>Green <span class="button blue">●</span>Blue <span class="button red">●</span>Red <span class="button yellow">●</span>Yellow | Q W E R</p>
+                    <p>Player 2: <span class="button green">●</span>Green <span class="button blue">●</span>Blue <span class="button red">●</span>Red <span class="button yellow">●</span>Yellow | U I O P</p>
                 </div>
             </div>
         </div>
@@ -92,7 +130,15 @@
                 <div class="score">Player 1: <span id="final-player1-score">0</span></div>
                 <div class="score">Player 2: <span id="final-player2-score">0</span></div>
             </div>
-            <button id="play-again-button" class="arcade-button">PLAY AGAIN</button>
+            <div class="arcade-start-section">
+                <button id="play-again-button" class="arcade-start-button">
+                    <div class="button-icon green">●</div>
+                    <div class="button-text">
+                        <div class="main-text">PLAY AGAIN</div>
+                        <div class="sub-text">Press any GREEN button</div>
+                    </div>
+                </button>
+            </div>
         </div>
     </div>
 
