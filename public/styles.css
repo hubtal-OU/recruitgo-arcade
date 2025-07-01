@@ -19,24 +19,32 @@ body {
     font-family: 'Press Start 2P', cursive;
     background-color: #000;
     color: #fff;
-    line-height: 1.6;
-    min-height: 100vh;
+    line-height: 1.4;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .container {
-    max-width: 1200px;
-    padding: 2rem;
+    width: 95vw;
+    height: 95vh;
+    padding: 2vh 2vw;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .title {
-    font-size: 3rem;
+    font-size: clamp(2rem, 8vw, 6rem);
     color: var(--arcade-yellow);
-    text-shadow: 4px 4px 0 var(--arcade-red);
-    margin-bottom: 2rem;
+    text-shadow: 0.2em 0.2em 0 var(--arcade-red);
+    margin-bottom: 2vh;
     animation: pulse 2s infinite;
 }
 
@@ -77,16 +85,17 @@ body {
 
 .question-container {
     background-color: #111;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
+    padding: 3vh 2vw;
+    border-radius: 1vw;
+    margin-bottom: 3vh;
+    flex-shrink: 0;
 }
 
 #question-text {
-    font-size: 1.4rem;
-    margin-bottom: 2rem;
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
+    margin-bottom: 3vh;
     color: var(--arcade-cyan);
-    line-height: 1.4;
+    line-height: 1.3;
 }
 
 .options-grid {
@@ -98,9 +107,9 @@ body {
 .options {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 2vh;
     width: 100%;
-    max-width: 600px;
+    max-width: 90vw;
 }
 
 .player-column h3 {
@@ -111,28 +120,32 @@ body {
 .option-button {
     display: flex;
     align-items: center;
-    padding: 1.5rem;
+    padding: 2vh 2vw;
     background-color: var(--arcade-black);
     color: var(--arcade-white);
-    border: 3px solid var(--arcade-purple);
-    border-radius: 8px;
+    border: 0.3vw solid var(--arcade-purple);
+    border-radius: 1vw;
     font-family: 'Press Start 2P', cursive;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 3vw, 2rem);
     cursor: pointer;
     transition: all 0.2s;
     position: relative;
-    min-height: 80px;
+    min-height: 8vh;
 }
 
 .option-button::before {
     content: '';
-    width: 40px;
-    height: 40px;
+    width: 4vw;
+    height: 4vw;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 60px;
+    max-height: 60px;
     border-radius: 50%;
-    margin-right: 1.5rem;
+    margin-right: 2vw;
     flex-shrink: 0;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 10px currentColor;
+    border: 0.2vw solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 1vw currentColor;
 }
 
 .option-button:nth-child(1)::before {
@@ -173,16 +186,16 @@ body {
 /* Player controls hint */
 .controls-hint {
     position: absolute;
-    bottom: 20px;
+    bottom: 2vh;
     left: 50%;
     transform: translateX(-50%);
     background: var(--arcade-black);
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 1vh 2vw;
+    border-radius: 1vw;
     color: var(--arcade-white);
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 2vw, 1.2rem);
     text-align: center;
-    border: 2px solid var(--arcade-white);
+    border: 0.2vw solid var(--arcade-white);
 }
 
 .controls-hint p {
@@ -354,14 +367,20 @@ body {
     right: 0;
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 2vh 4vw;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
+    height: 12vh;
+    align-items: center;
 }
 
 .game-container {
-    margin-top: 100px; /* Add space for the fixed header */
-    padding: 1rem;
+    margin-top: 12vh; /* Add space for the fixed header */
+    padding: 2vh 2vw;
+    height: calc(88vh - 4vh); /* Full height minus header and padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .countdown-overlay {
@@ -382,24 +401,24 @@ body {
 }
 
 #countdown-number {
-    font-size: 10rem;
+    font-size: clamp(6rem, 20vw, 15rem);
     color: var(--arcade-white);
     font-family: 'Press Start 2P', cursive;
     animation: countdown-pulse 1s infinite;
     text-shadow:
-        2px 2px 0 #00ffff,
-        4px 4px 0 #00ffff,
-        6px 6px 0 #000;
+        0.1em 0.1em 0 #00ffff,
+        0.2em 0.2em 0 #00ffff,
+        0.3em 0.3em 0 #000;
     filter: none !important;
     image-rendering: pixelated;
 }
 
 #countdown-start {
-    font-size: 5rem;
+    font-size: clamp(3rem, 10vw, 8rem);
     color: var(--arcade-green);
     font-family: 'Press Start 2P', cursive;
     animation: start-pulse 0.5s infinite;
-    text-shadow: 0 0 20px var(--arcade-green);
+    text-shadow: 0 0 2vw var(--arcade-green);
 }
 
 @keyframes countdown-pulse {
@@ -419,19 +438,19 @@ body {
     flex-direction: column;
     align-items: center;
     background: var(--arcade-black);
-    padding: 0.5rem 1rem;
-    border: 2px solid var(--arcade-purple);
-    border-radius: 4px;
+    padding: 1vh 2vw;
+    border: 0.2vw solid var(--arcade-purple);
+    border-radius: 1vw;
 }
 
 .player-label {
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 2vw, 1.2rem);
     color: var(--arcade-cyan);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5vh;
 }
 
 .player-score span:last-child {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
     color: var(--arcade-white);
 }
 
@@ -473,38 +492,39 @@ body {
 }
 
 .instructions {
-    max-width: 600px;
-    margin: 1rem auto;
-    padding: 1rem;
+    width: 90%;
+    margin: 1vh auto;
+    padding: 2vh 2vw;
     background: var(--arcade-black);
-    border: 2px solid var(--arcade-purple);
-    border-radius: 8px;
+    border: 0.2vw solid var(--arcade-purple);
+    border-radius: 1vw;
+    flex-shrink: 0;
 }
 
 .instructions h2 {
     text-align: center;
     color: var(--arcade-cyan);
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
+    margin-bottom: 2vh;
+    font-size: clamp(1rem, 3vw, 2rem);
 }
 
 .instruction-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 2vw;
+    margin-bottom: 2vh;
 }
 
 .instruction-section {
     background: rgba(255, 255, 255, 0.1);
-    padding: 1rem;
-    border-radius: 4px;
+    padding: 2vh 1vw;
+    border-radius: 0.5vw;
 }
 
 .instruction-section h3 {
     color: var(--arcade-green);
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
+    margin-bottom: 1vh;
+    font-size: clamp(0.8rem, 2.5vw, 1.5rem);
 }
 
 .instruction-section p {
@@ -675,11 +695,11 @@ body {
 
 /* Controller status */
 .controller-status {
-    font-size: 1rem;
-    padding: 1rem;
-    margin-bottom: 2rem;
-    border-radius: 8px;
-    border: 2px solid;
+    font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+    padding: 2vh 2vw;
+    margin-bottom: 2vh;
+    border-radius: 1vw;
+    border: 0.2vw solid;
     animation: pulse 2s infinite;
 }
 
@@ -706,7 +726,7 @@ body {
 .control-item {
     display: flex;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 2vw, 1.2rem);
     color: var(--arcade-white);
 }
 
@@ -720,9 +740,9 @@ body {
 
 /* Arcade button indicators */
 .button {
-    font-size: 1.5rem;
-    margin: 0 0.3rem;
-    text-shadow: 1px 1px 0 var(--arcade-black);
+    font-size: clamp(1rem, 3vw, 2rem);
+    margin: 0 0.5vw;
+    text-shadow: 0.1em 0.1em 0 var(--arcade-black);
 }
 
 .button.green {
@@ -751,17 +771,17 @@ body {
 .arcade-start-button {
     font-family: 'Press Start 2P', cursive;
     background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-    border: 4px solid var(--arcade-green);
-    border-radius: 16px;
-    padding: 1.5rem 2rem;
+    border: 0.4vw solid var(--arcade-green);
+    border-radius: 2vw;
+    padding: 3vh 4vw;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 3vw;
     box-shadow: 
-        0 0 20px rgba(0, 255, 0, 0.3),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+        0 0 2vw rgba(0, 255, 0, 0.3),
+        inset 0 0.2vw 0.4vw rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
 }
@@ -806,16 +826,16 @@ body {
 }
 
 .main-text {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
     color: var(--arcade-white);
-    text-shadow: 2px 2px 0 var(--arcade-black);
-    margin-bottom: 0.5rem;
+    text-shadow: 0.1em 0.1em 0 var(--arcade-black);
+    margin-bottom: 1vh;
 }
 
 .sub-text {
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 2vw, 1.2rem);
     color: var(--arcade-green);
-    text-shadow: 1px 1px 0 var(--arcade-black);
+    text-shadow: 0.05em 0.05em 0 var(--arcade-black);
     opacity: 0.9;
 }
 
