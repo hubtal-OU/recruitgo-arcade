@@ -96,7 +96,7 @@ body {
 
 #question-text {
     font-size: clamp(0.9rem, 3vw, 2rem);
-    margin-bottom: 2vh;
+    margin-bottom: 0.5vh;
     color: var(--arcade-cyan);
     line-height: 1.2;
     word-wrap: break-word;
@@ -377,11 +377,12 @@ body {
 
 .game-container {
     margin-top: 12vh; /* Add space for the fixed header */
-    padding: 2vh 2vw;
-    height: calc(88vh - 4vh); /* Full height minus header and padding */
+    padding: 0.5vh 1vw;
+    height: calc(88vh - 1vh); /* Full height minus header and padding */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 0.5vh;
 }
 
 .countdown-overlay {
