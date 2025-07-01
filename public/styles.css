@@ -88,9 +88,9 @@ body {
     background-color: #111;
     padding: 1.5vh 1vw;
     border-radius: 1vw;
-    margin-bottom: 1vh;
+    margin-bottom: 0.5vh;
     flex-shrink: 0;
-    max-height: 40vh;
+    max-height: 35vh;
     overflow: hidden;
 }
 
@@ -106,7 +106,7 @@ body {
 .options-grid {
     display: flex;
     justify-content: center;
-    margin: 2rem 0;
+    margin: 0.5vh 0;
 }
 
 .options {
@@ -194,20 +194,9 @@ body {
     background-color: rgba(255, 0, 0, 0.1);
 }
 
-/* Player controls hint */
+/* Player controls hint - hidden during gameplay */
 .controls-hint {
-    position: fixed;
-    bottom: 1vh;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--arcade-black);
-    padding: 0.5vh 1vw;
-    border-radius: 0.5vw;
-    color: var(--arcade-white);
-    font-size: clamp(0.6rem, 1.5vw, 1rem);
-    text-align: center;
-    border: 0.1vw solid var(--arcade-white);
-    z-index: 1000;
+    display: none;
 }
 
 .controls-hint p {
@@ -940,11 +929,5 @@ body {
 
     .options {
         gap: 0.8vh;
-    }
-
-    .controls-hint {
-        font-size: clamp(0.5rem, 1.2vw, 0.8rem);
-        padding: 0.3vh 0.8vw;
-        bottom: 0.5vh;
     }
 } 
